@@ -1,3 +1,7 @@
+// Write the raw fetch function.
+// This is just a plain async function — no hooks, no React.
+// It accepts a cursor for pagination and a filter object for ticker/category filtering.
+
 import type { NewsFeedPage, NewsFilter } from "@/types/news";
 
 export async function fetchNewsPage(
@@ -22,7 +26,7 @@ export async function fetchNewsPage(
 
   // return res.json(); => in production solution, for dev use below
 
-  return {
+  return Promise.resolve({
     nextCursor: null,
     totalCount: 28,
     articles: [
@@ -784,5 +788,5 @@ export async function fetchNewsPage(
         nation: "KR",
       },
     ],
-  };
+  }).then((res) => res);
 }
