@@ -20,7 +20,7 @@ export async function fetchNewsPage(
 
   if (!res.ok) throw new Error("Failed to fetch news");
 
-  // return res.json();
+  // return res.json(); => in production solution, for dev use below
 
   return {
     nextCursor: null,
