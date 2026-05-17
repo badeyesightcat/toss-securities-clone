@@ -17,7 +17,8 @@
 // } = useNewsFeed(filter)
 
 import type { NewsFilter, NewsFeedPage } from "@/types/news";
-import { fetchNewsPage } from "@/lib/api/news";
+// import { fetchNewsPage } from "@/lib/api/news";
+import { fetchMockNewsPage as fetchNewsPage } from "@/lib/api/news.mock";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 
 export function useNewsFeed(filter: NewsFilter) {
