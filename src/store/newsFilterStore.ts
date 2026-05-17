@@ -5,6 +5,7 @@
 
 import { create } from "zustand";
 import type { NewsFilter, NewsCategory } from "@/types/news";
+import { devtools } from "zustand/middleware";
 
 interface NewsFilterState {
   filter: NewsFilter;
@@ -18,14 +19,19 @@ const DEFAUL_FILTER: NewsFilter = {
   category: "all",
 };
 
-export const useNewsFilterStore = create<NewsFilterState>((set) => ({
-  filter: DEFAUL_FILTER,
+export const useNewsFilterStore = create(
+  devtools<NewsFilterState>(
+    (set) => ({
+      filter: DEFAUL_FILTER,
 
-  setTicker: (ticker) =>
-    set((state) => ({ filter: { ...state.filter, ticker } })),
+      setTicker: (ticker) =>
+        set((state) => ({ filter: { ...state.filter, ticker } })),
 
-  setCategory: (category) =>
-    set((state) => ({ filter: { ...state.filter, category } })),
+      setCategory: (category) =>
+        set((state) => ({ filter: { ...state.filter, category } })),
 
-  resetFilter: () => set({ filter: DEFAUL_FILTER }),
-}));
+      resetFilter: () => set({ filter: DEFAUL_FILTER }),
+    }),
+    { name: "NewsFilterStore" },
+  ),
+);
