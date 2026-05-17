@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-4">
+    <ul class="flex gap-3">
+        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-01">Folder structure</a></li>
+        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-02">Type definitions</a></li>
+        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-03">API layer</a></li>
+        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-04">useInfiniteQuery hook</a></li>
+        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-05">Zustand filter store</a></li>
+        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-06">NewsFeed component</a></li>
+        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-07">Prefetch on hover</a></li>
+        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-08">Route entry point</a></li>
+    </ul>
+
+    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-01"><strong>Folder structure</strong><br>
+        Key concept: Rule:<br>
+        lib/api/ contains plain async functions — no useQuery, no React. <br>
+        hooks/ wraps them with TanStack Query. <br>
+        Components only call hooks, never fetch directly. <br>
+        This separation means you can swap the API layer without touching any component.
+    <pre>
+    app/
+    └── news/
+        └── page.tsx              ← Route entry point (Server Component)
+
+    components/
+    └── news/
+        ├── NewsFeed.tsx           ← Client Component, owns the list
+        ├── NewsCard.tsx           ← Single article card (pure display)
+        ├── NewsFilterBar.tsx      ← Ticker + category filter UI
+        └── NewsSkeleton.tsx       ← Loading placeholder
+
+    hooks/
+    └── useNews.ts                 ← All TanStack Query logic lives here
+
+    lib/
+    └── api/
+        └── news.ts                ← Raw fetch functions (no React)
+
+    types/
+    └── news.ts                    ← NewsArticle, NewsFilter interfaces</pre>        
+    </section>
+
+    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-02"><strong>Type definitions</strong><br>
+        Key concept: nextCursor is the key to infinite scroll. The API returns a cursor pointing to the next page. When it's null, you've reached the end — this is how TanStack Query's useInfiniteQuery knows to disable 'load more'.
+    </section>
+
+    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-03"><strong>API layer</strong><br>
+        Key concept: Notice: no try/catch here. TanStack Query catches thrown errors and puts them in the error state automatically — handling it in the fetch function would swallow it before Query can see it.<br>
+        Note: next: { revalidate: 60 } is a Next.js App Router feature. It caches the fetch response at the server level for 60 seconds, reducing load on your news API.<br>
+        Start with a mock. Before wiring up a real API, return a hardcoded NewsFeedPage from fetchNewsPage. This lets you build and test every layer above it (hook, component, store) without needing a backend running. When you swap the mock for a real fetch, only lib/api/news.ts changes.
+    </section>
+
+    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-04"><strong>useInfiniteQuery hook</strong><br>Key concept: queryKey: ['news', ticker, category] is the cache address. Change the ticker? The key changes, Query treats it as a brand new query and fetches fresh data — but the old ticker's data stays cached so switching back is instant.</section>
+
+    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-05"><strong>Zustand filter store</strong><br>Key concept: Zustand stores UI state (what the user has selected). TanStack Query stores server state (the articles). They connect in the component: read filter from Zustand, pass it to useNewsFeed(filter). When Zustand updates, the hook re-runs with the new queryKey.</section>
+
+    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-06"><strong>NewsFeed component</strong><br>Key concept: data?.pages.flatMap(p => p.articles) is the canonical pattern. useInfiniteQuery keeps all pages in memory as an array of pages — flatMap collapses them into one list. The ?? [] fallback handles the initial undefined state before data loads.</section>
+
+    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-07"><strong class="bg-blue-400 p-2">Good for performance! Prefetch on hover</strong><br>Key concept: prefetchInfiniteQuery uses the same queryKey as useNewsFeed — so when fetchNextPage() is called, the data is already in the cache and renders instantly. This is the 'wow factor' moment on the News Feed page.</section>
+
+    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-08"><strong class="bg-blue-400 p-2">Good for performance! Route entry point</strong><br>Key concept: HydrationBoundary is optional but powerful. It lets the server prefetch the first page and send it embedded in the HTML — the client renders instantly with real data, no loading skeleton on first visit.</section>
+</body>
+</html>
