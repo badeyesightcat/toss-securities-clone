@@ -1,0 +1,268 @@
+.filter-bar-root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 0 16px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 16px;
+  font-family: -apple-system, "Pretendard", sans-serif;
+}
+
+/* ── Ticker row ── */
+.ticker-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ticker-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f7f8fa;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  padding: 0 10px;
+  height: 40px;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.ticker-input-wrap.focused {
+  background: #fff;
+  border-color: #3182f6;
+}
+.search-icon {
+  width: 15px;
+  height: 15px;
+  color: #aab;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+.ticker-input-wrap.focused .search-icon {
+  color: #3182f6;
+}
+.ticker-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: #191f28;
+  letter-spacing: 0.04em;
+}
+.ticker-input::placeholder {
+  color: #c0c4cc;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: #dde1e8;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: background 0.12s;
+}
+.clear-btn:hover {
+  background: #cdd1d9;
+}
+.clear-btn svg {
+  width: 8px;
+  height: 8px;
+  color: #6b7280;
+}
+.reset-btn {
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 14px;
+  border: 1.5px solid #e4e8ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 0.12s,
+    color 0.12s;
+  font-family: inherit;
+}
+.reset-btn:hover {
+  border-color: #3182f6;
+  color: #3182f6;
+}
+
+/* ── Chips row ── */
+.chips-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.chip {
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition:
+    background 0.12s,
+    color 0.12s,
+    border-color 0.12s;
+}
+.ticker-chip {
+  background: #f2f4f7;
+  border: 1.5px solid transparent;
+  color: #4b5563;
+}
+.ticker-chip:hover {
+  background: #e8ecf3;
+  color: #191f28;
+}
+.ticker-chip.active {
+  background: #e8f0fe;
+  border-color: #3182f6;
+  color: #1a56db;
+}
+
+/* ── Category row ── */
+.category-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.category-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 34px;
+  padding: 0 13px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border: 1.5px solid #e8ebf0;
+  background: #fff;
+  color: #6b7280;
+  transition: all 0.12s;
+}
+.category-pill:hover {
+  border-color: #c8cdd6;
+  color: #374151;
+}
+.category-pill.active {
+  background: #191f28;
+  border-color: #191f28;
+  color: #fff;
+}
+.cat-emoji {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* ── Filter summary ── */
+.filter-summary {
+  font-size: 12px;
+  color: #9ca3af;
+  padding-left: 2px;
+}
+.filter-summary strong {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* ── Dark mode ── */
+@media (prefers-color-scheme: dark) {
+  .filter-bar-root {
+    border-bottom-color: #1f2937;
+  }
+  .ticker-input-wrap {
+    background: #111827;
+  }
+  .ticker-input-wrap.focused {
+    background: #1a2234;
+    border-color: #3b82f6;
+  }
+  .ticker-input {
+    color: #f3f4f6;
+  }
+  .ticker-input::placeholder {
+    color: #4b5563;
+  }
+  .clear-btn {
+    background: #374151;
+  }
+  .clear-btn:hover {
+    background: #4b5563;
+  }
+  .clear-btn svg {
+    color: #9ca3af;
+  }
+  .reset-btn {
+    background: transparent;
+    border-color: #374151;
+    color: #6b7280;
+  }
+  .reset-btn:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+  }
+  .ticker-chip {
+    background: #1f2937;
+    color: #9ca3af;
+  }
+  .ticker-chip:hover {
+    background: #273548;
+    color: #e5e7eb;
+  }
+  .ticker-chip.active {
+    background: #1e3a5f;
+    border-color: #3b82f6;
+    color: #60a5fa;
+  }
+  .category-pill {
+    background: transparent;
+    border-color: #1f2937;
+    color: #6b7280;
+  }
+  .category-pill:hover {
+    border-color: #374151;
+    color: #d1d5db;
+  }
+  .category-pill.active {
+    background: #f3f4f6;
+    border-color: #f3f4f6;
+    color: #111827;
+  }
+  .filter-summary {
+    color: #4b5563;
+  }
+  .filter-summary strong {
+    color: #9ca3af;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .chips-row,
+  .category-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+  .chips-row::-webkit-scrollbar,
+  .category-row::-webkit-scrollbar {
+    display: none;
+  }
+}
