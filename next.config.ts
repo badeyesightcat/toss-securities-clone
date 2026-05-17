@@ -5,7 +5,11 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
     remotePatterns: [
-      new URL("https://static.tossinvestcdn.com/assets/image/**"),
+      new URL("https://static.tossinvestcdn.com/**"),
+      new URL("https://img.newspim.com/news/**"),
+      new URL("https://wimg.mk.co.kr/news/**"),
+      new URL("https://static.toss.im/**"),
+      new URL("https://image.edaily.co.kr/images/**"),
     ],
   },
 };
