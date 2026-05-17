@@ -127,7 +127,7 @@ const MOCK_ARTICLES: NewsArticle[] = [
     source: "조선비즈",
     category: "impact_news",
     imageUrl:
-      "https://biz.chosun.com/resizer/v2/S5CX6WWJJRG55LIY2TPVZLOYFY.jpg?auth=98763a42f1b404f2360f0880865a69e1c44a02fb5340b7c9e8b187b109d0c511&width=1920&height=1080&smart=true",
+      "https://static.toss.im/png-icons/securities/icn-sec-fill-259960.png",
     relatedStocks: [
       {
         stockCode: "A259960",
@@ -253,7 +253,7 @@ const MOCK_ARTICLES: NewsArticle[] = [
     source: "조선비즈",
     category: "cluster_popular",
     imageUrl:
-      "https://biz.chosun.com/resizer/v2/HZUTL2JAAFAXJH4UXI7UER23N4.jpg?auth=1f9dacbd9873de58f90c824fbf97600a4575fceb48b35863dc95b7b100087321&width=1200&height=800&smart=true",
+      "https://static.toss.im/png-icons/securities/icn-sec-fill-047040.png",
     relatedStocks: [
       {
         stockCode: "A047040",

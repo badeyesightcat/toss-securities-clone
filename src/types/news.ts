@@ -20,7 +20,12 @@ export interface RelatedStockItem {
   market: string;
 }
 
-export type NewsCategory = string; //  "market" | "earnings" | "macro" | "crypto" | "all";
+// [DEV]  "market" | "earnings" | "macro" | "crypto" | "all";
+export type NewsCategory =
+  | "all"
+  | "cluster_popular"
+  | "impact_news"
+  | "cluster_popular|impact_news";
 
 export interface NewsFilter {
   ticker?: string; // undefined = show all
