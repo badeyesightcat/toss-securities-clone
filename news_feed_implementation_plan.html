@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    :root{
+    --color-background-primary: light-dark(rgba(255, 255, 255, 1), rgba(48, 48, 46, 1));
+    --color-background-secondary: light-dark(rgba(245, 244, 237, 1), rgba(38, 38, 36, 1));
+    --color-background-tertiary: light-dark(rgba(250, 249, 245, 1), rgba(20, 20, 19, 1));
+    --color-background-inverse: light-dark(rgba(20, 20, 19, 1), rgba(250, 249, 245, 1));
+    --color-background-ghost: light-dark(rgba(255, 255, 255, 0), rgba(48, 48, 46, 0));
+    --color-background-info: light-dark(rgba(214, 228, 246, 1), rgba(37, 62, 95, 1));
+    --color-background-danger: light-dark(rgba(247, 236, 236, 1), rgba(96, 42, 40, 1));
+    --color-background-success: light-dark(rgba(233, 241, 220, 1), rgba(27, 70, 20, 1));
+    --color-background-warning: light-dark(rgba(246, 238, 223, 1), rgba(72, 58, 15, 1));
+    --color-background-disabled: light-dark(rgba(255, 255, 255, 0.5), rgba(48, 48, 46, 0.5));
+    --color-text-primary: light-dark(rgba(20, 20, 19, 1), rgba(250, 249, 245, 1));
+    --color-text-secondary: light-dark(rgba(61, 61, 58, 1), rgba(194, 192, 182, 1));
+    --color-text-tertiary: light-dark(rgba(115, 114, 108, 1), rgba(156, 154, 146, 1));
+    --color-text-inverse: light-dark(rgba(255, 255, 255, 1), rgba(20, 20, 19, 1));
+    --color-text-info: light-dark(rgba(50, 102, 173, 1), rgba(128, 170, 221, 1));
+    --color-text-danger: light-dark(rgba(127, 44, 40, 1), rgba(238, 136, 132, 1));
+    --color-text-success: light-dark(rgba(38, 91, 25, 1), rgba(122, 185, 72, 1));
+    --color-text-warning: light-dark(rgba(90, 72, 21, 1), rgba(209, 160, 65, 1));
+    --color-text-disabled: light-dark(rgba(20, 20, 19, 0.5), rgba(250, 249, 245, 0.5));
+    --color-text-ghost: light-dark(rgba(115, 114, 108, 0.5), rgba(156, 154, 146, 0.5));
+    --color-border-primary: light-dark(rgba(31, 30, 29, 0.4), rgba(222, 220, 209, 0.4));
+    --color-border-secondary: light-dark(rgba(31, 30, 29, 0.3), rgba(222, 220, 209, 0.3));
+    --color-border-tertiary: light-dark(rgba(31, 30, 29, 0.15), rgba(222, 220, 209, 0.15));
+    --color-border-inverse: light-dark(rgba(255, 255, 255, 0.3), rgba(20, 20, 19, 0.15));
+    --color-border-ghost: light-dark(rgba(31, 30, 29, 0), rgba(222, 220, 209, 0));
+    --color-border-info: light-dark(rgba(70, 130, 213, 1), rgba(70, 130, 213, 1));
+    --color-border-danger: light-dark(rgba(167, 61, 57, 1), rgba(205, 92, 88, 1));
+    --color-border-success: light-dark(rgba(67, 116, 38, 1), rgba(89, 145, 48, 1));
+    --color-border-warning: light-dark(rgba(128, 92, 31, 1), rgba(168, 120, 41, 1));
+    --color-border-disabled: light-dark(rgba(31, 30, 29, 0.1), rgba(222, 220, 209, 0.1));
+    --color-ring-primary: light-dark(rgba(20, 20, 19, 0.7), rgba(250, 249, 245, 0.7));
+    --color-ring-secondary: light-dark(rgba(61, 61, 58, 0.7), rgba(194, 192, 182, 0.7));
+    --color-ring-inverse: light-dark(rgba(255, 255, 255, 0.7), rgba(20, 20, 19, 0.7));
+    --color-ring-info: light-dark(rgba(50, 102, 173, 0.5), rgba(128, 170, 221, 0.5));
+    --color-ring-danger: light-dark(rgba(167, 61, 57, 0.5), rgba(205, 92, 88, 0.5));
+    --color-ring-success: light-dark(rgba(67, 116, 38, 0.5), rgba(89, 145, 48, 0.5));
+    --color-ring-warning: light-dark(rgba(128, 92, 31, 0.5), rgba(168, 120, 41, 0.5));
+    --font-sans: Anthropic Sans, sans-serif;
+    --font-mono: ui-monospace, monospace;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-text-xs-size: 12px;
+    --font-text-sm-size: 14px;
+    --font-text-md-size: 16px;
+    --font-text-lg-size: 20px;
+    --font-heading-xs-size: 12px;
+    --font-heading-sm-size: 14px;
+    --font-heading-md-size: 16px;
+    --font-heading-lg-size: 20px;
+    --font-heading-xl-size: 24px;
+    --font-heading-2xl-size: 28px;
+    --font-heading-3xl-size: 36px;
+    --font-text-xs-line-height: 1.4;
+    --font-text-sm-line-height: 1.4;
+    --font-text-md-line-height: 1.4;
+    --font-text-lg-line-height: 1.25;
+    --font-heading-xs-line-height: 1.4;
+    --font-heading-sm-line-height: 1.4;
+    --font-heading-md-line-height: 1.4;
+    --font-heading-lg-line-height: 1.25;
+    --font-heading-xl-line-height: 1.25;
+    --font-heading-2xl-line-height: 1.1;
+    --font-heading-3xl-line-height: 1;
+    --border-radius-xs: 4px;
+    --border-radius-sm: 6px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 10px;
+    --border-radius-xl: 12px;
+    --border-radius-full: 9999px;
+    --border-width-regular: 0.5px;
+    --shadow-hairline: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+*{box-sizing:border-box;margin:0;padding:0}
+body { zoom: 1.5 }
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+pre{background:var(--color-background-tertiary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:14px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.7;color:var(--color-text-primary);overflow-x:auto;white-space:pre}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.tag-tsq{background:var(--color-background-danger);color:var(--color-text-danger)}
+.tag-zus{background:var(--color-background-warning);color:var(--color-text-warning)}
+.tag-new{background:var(--color-background-success);color:var(--color-text-success)}
+.tag-file{background:var(--color-background-info);color:var(--color-text-info)}
+.pill{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:500;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s;flex-shrink:0}
+.pill.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.pill.done{background:var(--color-background-success);color:var(--color-text-success);border-color:var(--color-border-success,var(--color-border-secondary))}
+.concept-box{background:var(--color-background-info);border-radius:var(--border-radius-md);padding:12px 14px;font-size:12px;color:var(--color-text-info);line-height:1.6;margin-top:12px}
+.warn-box{background:var(--color-background-warning);border-radius:var(--border-radius-md);padding:12px 14px;font-size:12px;color:var(--color-text-warning);line-height:1.6;margin-top:12px}
+.file-label{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--border-radius-md);background:var(--color-background-info);color:var(--color-text-info);margin-bottom:6px}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin:16px 0 6px}
+p.body{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+</style>
+
+</head>
+<body class="p-4!">
+  
+<h2 class="sr-only">News feed implementation plan — interactive step-by-step guide</h2>
+
+<div style="padding:1rem 0">
+
+  <div id="stepper-header" style="display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap"></div>
+
+  <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:20px" id="phase-card"></div>
+
+  <div style="display:flex;gap:10px;margin-top:16px;justify-content:space-between;align-items:center">
+    <button id="btn-prev" onclick="nav(-1)">← Previous</button>
+    <span id="phase-counter" style="font-size:12px;color:var(--color-text-tertiary)"></span>
+    <button id="btn-next" onclick="nav(1)">Next →</button>
+  </div>
+
+</div>
+
+<script>
+const phases = [
+  {
+    title: "Folder structure",
+    tags: ["file"],
+    summary: "Before writing any logic, create the scaffolding. This page touches four layers: route, components, hooks, and types. Separating them now prevents everything ending up in one giant page.tsx.",
+    sections: [
+      {
+        label: null,
+        code: `app/
+└── news/
+    └── page.tsx              ← Route entry point (Server Component)
+
+components/
+└── news/
+    ├── NewsFeed.tsx           ← Client Component, owns the list
+    ├── NewsCard.tsx           ← Single article card (pure display)
+    ├── NewsFilterBar.tsx      ← Ticker + category filter UI
+    └── NewsSkeleton.tsx       ← Loading placeholder
+
+hooks/
+└── useNews.ts                 ← All TanStack Query logic lives here
+
+lib/
+└── api/
+    └── news.ts                ← Raw fetch functions (no React)
+
+types/
+└── news.ts                    ← NewsArticle, NewsFilter interfaces`
+      }
+    ],
+    concept: "Rule: lib/api/ contains plain async functions — no useQuery, no React. hooks/ wraps them with TanStack Query. Components only call hooks, never fetch directly. This separation means you can swap the API layer without touching any component.",
+  },
+  {
+    title: "Type definitions",
+    tags: ["file", "new"],
+    summary: "Define the shape of your data before writing any fetch logic. TypeScript will catch mismatches automatically and give you autocomplete everywhere.",
+    sections: [
+      {
+        label: "types/news.ts",
+        fileTag: true,
+        code: `export interface NewsArticle {
+  id: string
+  title: string
+  summary: string
+  source: string         // e.g. "Reuters", "Bloomberg"
+  publishedAt: string    // ISO 8601
+  tickers: string[]      // related tickers e.g. ["AAPL", "MSFT"]
+  category: NewsCategory
+  imageUrl?: string
+  url: string
+}
+
+export type NewsCategory = 
+  | "market"
+  | "earnings"
+  | "macro"
+  | "crypto"
+  | "all"
+
+export interface NewsFilter {
+  ticker?: string        // undefined = show all
+  category: NewsCategory
+}
+
+export interface NewsFeedPage {
+  articles: NewsArticle[]
+  nextCursor: string | null  // null = no more pages
+  totalCount: number
+}`
+      }
+    ],
+    concept: "nextCursor is the key to infinite scroll. The API returns a cursor pointing to the next page. When it's null, you've reached the end — this is how TanStack Query's useInfiniteQuery knows to disable 'load more'.",
+  },
+  {
+    title: "API layer",
+    tags: ["file", "new"],
+    summary: "Write the raw fetch function. This is just a plain async function — no hooks, no React. It accepts a cursor for pagination and a filter object for ticker/category filtering.",
+    sections: [
+      {
+        label: "lib/api/news.ts",
+        fileTag: true,
+        code: `import type { NewsFeedPage, NewsFilter } from "@/types/news"
+
+export async function fetchNewsPage(
+  filter: NewsFilter,
+  cursor: string | null
+): Promise<NewsFeedPage> {
+  const params = new URLSearchParams()
+
+  if (filter.ticker) params.set("ticker", filter.ticker)
+  if (filter.category !== "all") params.set("category", filter.category)
+  if (cursor) params.set("cursor", cursor)
+
+  const res = await fetch(\`/api/news?\${params}\`, {
+    next: { revalidate: 60 }  // Next.js: cache for 60s
+  })
+
+  if (!res.ok) throw new Error("Failed to fetch news")
+
+  return res.json()
+}`
+      }
+    ],
+    concept: "Notice: no try/catch here. TanStack Query catches thrown errors and puts them in the error state automatically — handling it in the fetch function would swallow it before Query can see it.",
+    warn: "next: { revalidate: 60 } is a Next.js App Router feature. It caches the fetch response at the server level for 60 seconds, reducing load on your news API.",
+  },
+  {
+    title: "useInfiniteQuery hook",
+    tags: ["tsq", "new"],
+    summary: "This is the core of the News Feed page. useInfiniteQuery manages all pagination state for you — current page, loading states, fetching next page, and the flattened article list.",
+    sections: [
+      {
+        label: "hooks/useNews.ts",
+        fileTag: true,
+        code: `import { useInfiniteQuery } from "@tanstack/react-query"
+import { fetchNewsPage } from "@/lib/api/news"
+import type { NewsFilter } from "@/types/news"
+
+export function useNewsFeed(filter: NewsFilter) {
+  return useInfiniteQuery({
+    // Key changes when filter changes → auto-refetch
+    queryKey: ["news", filter.ticker ?? "all", filter.category],
+
+    queryFn: ({ pageParam }) =>
+      fetchNewsPage(filter, pageParam as string | null),
+
+    initialPageParam: null,
+
+    // Tell Query how to get the next cursor from each page
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
+
+    staleTime: 5 * 60 * 1000,  // 5 minutes — news doesn't change that fast
+    gcTime: 10 * 60 * 1000,    // keep in cache 10 min after unmount
+  })
+}`
+      },
+      {
+        label: "What you get back",
+        code: `const {
+  data,           // { pages: NewsFeedPage[], pageParams: [...] }
+  isLoading,      // true only on first load
+  isFetchingNextPage,  // true when loading next page
+  hasNextPage,    // false when nextCursor is null
+  fetchNextPage,  // call this to load more
+  error,
+  refetch,
+} = useNewsFeed(filter)`
+      }
+    ],
+    concept: "queryKey: ['news', ticker, category] is the cache address. Change the ticker? The key changes, Query treats it as a brand new query and fetches fresh data — but the old ticker's data stays cached so switching back is instant.",
+  },
+  {
+    title: "Zustand filter store",
+    tags: ["zus", "new"],
+    summary: "The selected ticker and category are UI state — they don't come from the server. Store them in Zustand so any component in the tree can read or update the filter without prop drilling.",
+    sections: [
+      {
+        label: "store/newsFilterStore.ts",
+        fileTag: true,
+        code: `import { create } from "zustand"
+import type { NewsFilter, NewsCategory } from "@/types/news"
+
+interface NewsFilterState {
+  filter: NewsFilter
+  setTicker: (ticker: string | undefined) => void
+  setCategory: (category: NewsCategory) => void
+  resetFilter: () => void
+}
+
+const DEFAULT_FILTER: NewsFilter = {
+  ticker: undefined,
+  category: "all",
+}
+
+export const useNewsFilterStore = create<NewsFilterState>((set) => ({
+  filter: DEFAULT_FILTER,
+
+  setTicker: (ticker) =>
+    set((state) => ({ filter: { ...state.filter, ticker } })),
+
+  setCategory: (category) =>
+    set((state) => ({ filter: { ...state.filter, category } })),
+
+  resetFilter: () => set({ filter: DEFAULT_FILTER }),
+}))`
+      }
+    ],
+    concept: "Zustand stores UI state (what the user has selected). TanStack Query stores server state (the articles). They connect in the component: read filter from Zustand, pass it to useNewsFeed(filter). When Zustand updates, the hook re-runs with the new queryKey.",
+  },
+  {
+    title: "NewsFeed component",
+    tags: ["new"],
+    summary: "The Client Component that connects everything. It reads filter from Zustand, passes it to the hook, renders the list, and wires up the 'load more' button.",
+    sections: [
+      {
+        label: "components/news/NewsFeed.tsx",
+        fileTag: true,
+        code: `"use client"
+
+import { useNewsFeed } from "@/hooks/useNews"
+import { useNewsFilterStore } from "@/store/newsFilterStore"
+import { NewsCard } from "./NewsCard"
+import { NewsSkeleton } from "./NewsSkeleton"
+import { NewsFilterBar } from "./NewsFilterBar"
+
+export function NewsFeed() {
+  // Read filter from Zustand
+  const filter = useNewsFilterStore((state) => state.filter)
+
+  // Pass it to the hook — queryKey updates automatically
+  const {
+    data,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+    error,
+    dataUpdatedAt,
+  } = useNewsFeed(filter)
+
+  // Flatten pages array into a single articles list
+  const articles = data?.pages.flatMap((page) => page.articles) ?? []
+
+  if (isLoading) return <NewsSkeleton count={6} />
+  if (error) return <ErrorState onRetry={() => refetch()} />
+
+  return (
+    <div>
+      <NewsFilterBar />
+
+      {/* Stale indicator */}
+      {dataUpdatedAt && Date.now() - dataUpdatedAt > 5 * 60 * 1000 && (
+        <StaleNotice updatedAt={dataUpdatedAt} />
+      )}
+
+      <ul>
+        {articles.map((article) => (
+          <NewsCard key={article.id} article={article} />
+        ))}
+      </ul>
+
+      {hasNextPage && (
+        <button
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
+        >
+          {isFetchingNextPage ? "Loading..." : "Load more"}
+        </button>
+      )}
+    </div>
+  )
+}`
+      }
+    ],
+    concept: "data?.pages.flatMap(p => p.articles) is the canonical pattern. useInfiniteQuery keeps all pages in memory as an array of pages — flatMap collapses them into one list. The ?? [] fallback handles the initial undefined state before data loads.",
+  },
+  {
+    title: "Prefetch on hover",
+    tags: ["tsq"],
+    summary: "The most impressive UX improvement: when the user hovers 'Load more', start fetching the next page before they click. By the time they click, the data is already in cache — no spinner.",
+    sections: [
+      {
+        label: "Prefetch pattern — add to NewsFeed.tsx",
+        code: `import { useQueryClient } from "@tanstack/react-query"
+import { fetchNewsPage } from "@/lib/api/news"
+
+// Inside the component:
+const queryClient = useQueryClient()
+
+const handlePrefetch = () => {
+  if (!hasNextPage || isFetchingNextPage) return
+
+  const lastPage = data?.pages[data.pages.length - 1]
+  const nextCursor = lastPage?.nextCursor
+
+  // Manually prime the cache with the next page
+  queryClient.prefetchInfiniteQuery({
+    queryKey: ["news", filter.ticker ?? "all", filter.category],
+    queryFn: ({ pageParam }) =>
+      fetchNewsPage(filter, pageParam as string | null),
+    initialPageParam: null,
+  })
+}
+
+// In JSX:
+<button
+  onMouseEnter={handlePrefetch}  // ← prefetch on hover
+  onClick={() => fetchNextPage()}
+  disabled={isFetchingNextPage}
+>
+  Load more
+</button>`
+      }
+    ],
+    concept: "prefetchInfiniteQuery uses the same queryKey as useNewsFeed — so when fetchNextPage() is called, the data is already in the cache and renders instantly. This is the 'wow factor' moment on the News Feed page.",
+  },
+  {
+    title: "Route entry point",
+    tags: ["file"],
+    summary: "The Next.js page.tsx is a Server Component. Keep it thin — just render the Client Component. Any server-side data prefetching (optional, for SSR) would also live here.",
+    sections: [
+      {
+        label: "app/news/page.tsx",
+        fileTag: true,
+        code: `import { NewsFeed } from "@/components/news/NewsFeed"
+
+export const metadata = {
+  title: "News — Toss Stock",
+}
+
+export default function NewsPage() {
+  // Server Component: no hooks, no useState
+  // Just hand off to the Client Component
+  return (
+    <main>
+      <h1>Market news</h1>
+      <NewsFeed />
+    </main>
+  )
+}`,
+      },
+      {
+        label: "Optional: SSR prefetch with HydrationBoundary",
+        code: `import { HydrationBoundary, dehydrate } from "@tanstack/react-query"
+import { getQueryClient } from "@/lib/queryClient"
+import { fetchNewsPage } from "@/lib/api/news"
+
+export default async function NewsPage() {
+  const queryClient = getQueryClient()
+
+  // Prefetch first page on the server — no loading spinner on first render
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["news", "all", "all"],
+    queryFn: ({ pageParam }) =>
+      fetchNewsPage({ category: "all" }, pageParam as null),
+    initialPageParam: null,
+  })
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <main>
+        <h1>Market news</h1>
+        <NewsFeed />
+      </main>
+    </HydrationBoundary>
+  )
+}`
+      }
+    ],
+    concept: "HydrationBoundary is optional but powerful. It lets the server prefetch the first page and send it embedded in the HTML — the client renders instantly with real data, no loading skeleton on first visit.",
+  },
+  {
+    title: "Build order",
+    tags: [],
+    summary: "Follow this order exactly. Each step has a clear done state before moving on.",
+    sections: [
+      {
+        label: null,
+        code: `Step 1  types/news.ts
+        Define NewsArticle, NewsFilter, NewsFeedPage
+        Done when: TypeScript compiles with no errors
+
+Step 2  lib/api/news.ts
+        Write fetchNewsPage with real or mock data
+        Done when: calling it in browser console returns articles
+
+Step 3  hooks/useNews.ts
+        Wrap in useInfiniteQuery
+        Done when: console.log(data) shows pages array
+
+Step 4  store/newsFilterStore.ts
+        Create filter store with setTicker / setCategory
+        Done when: devtools shows Zustand store
+
+Step 5  components/news/NewsSkeleton.tsx
+        Build loading placeholder (gray boxes)
+        Done when: looks good at all screen sizes
+
+Step 6  components/news/NewsCard.tsx
+        Display one article (title, source, date, tickers)
+        Done when: renders from hardcoded NewsArticle object
+
+Step 7  components/news/NewsFilterBar.tsx
+        Ticker input + category buttons, writes to Zustand
+        Done when: selecting a category updates the store
+
+Step 8  components/news/NewsFeed.tsx
+        Connect hook + store + card + skeleton
+        Done when: filter changes refetch and re-render
+
+Step 9  app/news/page.tsx
+        Add route, test end-to-end
+
+Step 10 Add prefetch on hover (optional polish)`
+      }
+    ],
+    concept: "Starting from types forces you to think about data shape before implementation. If you start with the component, you'll change your data shape three times as you discover what you actually need.",
+  },
+];
+
+let current = 0;
+
+function nav(dir) {
+  current = Math.max(0, Math.min(phases.length - 1, current + dir));
+  render();
+}
+
+function goTo(i) {
+  current = i;
+  render();
+}
+
+function render() {
+  const p = phases[current];
+
+  const header = document.getElementById('stepper-header');
+  header.innerHTML = phases.map((ph, i) => {
+    const cls = i < current ? 'pill done' : i === current ? 'pill active' : 'pill';
+    return `<span class="${cls}" onclick="goTo(${i})" title="${ph.title}">${i < current ? '✓' : i + 1}</span>`;
+  }).join('<div style="flex:1;height:0.5px;background:var(--color-border-tertiary);min-width:6px;max-width:24px;align-self:center"></div>');
+
+  const tagMap = {
+    tsq: ['tag-tsq', 'TanStack Query'],
+    zus: ['tag-zus', 'Zustand'],
+    new: ['tag-new', 'New file'],
+    file: ['tag-file', 'File'],
+  };
+
+  const tagsHtml = p.tags.map(t => {
+    const [cls, label] = tagMap[t];
+    return `<span class="tag ${cls}">${label}</span>`;
+  }).join('');
+
+  let sectionsHtml = p.sections.map(s => {
+    const fileLabelHtml = s.fileTag
+      ? `<div class="file-label"><i class="ti ti-file-code" aria-hidden="true"></i>${s.label}</div>`
+      : s.label ? `<div class="section-title">${s.label}</div>` : '';
+    return `${fileLabelHtml}<pre>${escHtml(s.code)}</pre>`;
+  }).join('');
+
+  const conceptHtml = p.concept
+    ? `<div class="concept-box"><strong>Key concept:</strong> ${p.concept}</div>` : '';
+  const warnHtml = p.warn
+    ? `<div class="warn-box"><strong>Note:</strong> ${p.warn}</div>` : '';
+
+  document.getElementById('phase-card').innerHTML = `
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:4px">Phase ${current + 1} of ${phases.length}</div>
+        <div style="font-size:16px;font-weight:500;color:var(--color-text-primary)">${p.title}</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${tagsHtml}</div>
+    </div>
+    <p class="body" style="margin-bottom:14px">${p.summary}</p>
+    ${sectionsHtml}
+    ${conceptHtml}
+    ${warnHtml}
+  `;
+
+  document.getElementById('btn-prev').disabled = current === 0;
+  document.getElementById('btn-next').disabled = current === phases.length - 1;
+  document.getElementById('btn-next').textContent = current === phases.length - 1 ? 'Done ✓' : 'Next →';
+  document.getElementById('phase-counter').textContent = `${current + 1} / ${phases.length}`;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+render();
+</script>
+
+</body>
+</html>
