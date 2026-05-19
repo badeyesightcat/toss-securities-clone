@@ -1,6 +1,6 @@
 import { OrderFormValues, PlacedOrder } from "@/types/order";
 
-export async function PlaceOrder(
+export async function placeOrder(
   values: OrderFormValues,
 ): Promise<PlacedOrder> {
   const res = await fetch("api/orders", {
