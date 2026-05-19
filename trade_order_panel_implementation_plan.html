@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+  :root{
+    --color-background-primary: light-dark(rgba(255, 255, 255, 1), rgba(48, 48, 46, 1));
+    --color-background-secondary: light-dark(rgba(245, 244, 237, 1), rgba(38, 38, 36, 1));
+    --color-background-tertiary: light-dark(rgba(250, 249, 245, 1), rgba(20, 20, 19, 1));
+    --color-background-inverse: light-dark(rgba(20, 20, 19, 1), rgba(250, 249, 245, 1));
+    --color-background-ghost: light-dark(rgba(255, 255, 255, 0), rgba(48, 48, 46, 0));
+    --color-background-info: light-dark(rgba(214, 228, 246, 1), rgba(37, 62, 95, 1));
+    --color-background-danger: light-dark(rgba(247, 236, 236, 1), rgba(96, 42, 40, 1));
+    --color-background-success: light-dark(rgba(233, 241, 220, 1), rgba(27, 70, 20, 1));
+    --color-background-warning: light-dark(rgba(246, 238, 223, 1), rgba(72, 58, 15, 1));
+    --color-background-disabled: light-dark(rgba(255, 255, 255, 0.5), rgba(48, 48, 46, 0.5));
+    --color-text-primary: light-dark(rgba(20, 20, 19, 1), rgba(250, 249, 245, 1));
+    --color-text-secondary: light-dark(rgba(61, 61, 58, 1), rgba(194, 192, 182, 1));
+    --color-text-tertiary: light-dark(rgba(115, 114, 108, 1), rgba(156, 154, 146, 1));
+    --color-text-inverse: light-dark(rgba(255, 255, 255, 1), rgba(20, 20, 19, 1));
+    --color-text-info: light-dark(rgba(50, 102, 173, 1), rgba(128, 170, 221, 1));
+    --color-text-danger: light-dark(rgba(127, 44, 40, 1), rgba(238, 136, 132, 1));
+    --color-text-success: light-dark(rgba(38, 91, 25, 1), rgba(122, 185, 72, 1));
+    --color-text-warning: light-dark(rgba(90, 72, 21, 1), rgba(209, 160, 65, 1));
+    --color-text-disabled: light-dark(rgba(20, 20, 19, 0.5), rgba(250, 249, 245, 0.5));
+    --color-text-ghost: light-dark(rgba(115, 114, 108, 0.5), rgba(156, 154, 146, 0.5));
+    --color-border-primary: light-dark(rgba(31, 30, 29, 0.4), rgba(222, 220, 209, 0.4));
+    --color-border-secondary: light-dark(rgba(31, 30, 29, 0.3), rgba(222, 220, 209, 0.3));
+    --color-border-tertiary: light-dark(rgba(31, 30, 29, 0.15), rgba(222, 220, 209, 0.15));
+    --color-border-inverse: light-dark(rgba(255, 255, 255, 0.3), rgba(20, 20, 19, 0.15));
+    --color-border-ghost: light-dark(rgba(31, 30, 29, 0), rgba(222, 220, 209, 0));
+    --color-border-info: light-dark(rgba(70, 130, 213, 1), rgba(70, 130, 213, 1));
+    --color-border-danger: light-dark(rgba(167, 61, 57, 1), rgba(205, 92, 88, 1));
+    --color-border-success: light-dark(rgba(67, 116, 38, 1), rgba(89, 145, 48, 1));
+    --color-border-warning: light-dark(rgba(128, 92, 31, 1), rgba(168, 120, 41, 1));
+    --color-border-disabled: light-dark(rgba(31, 30, 29, 0.1), rgba(222, 220, 209, 0.1));
+    --color-ring-primary: light-dark(rgba(20, 20, 19, 0.7), rgba(250, 249, 245, 0.7));
+    --color-ring-secondary: light-dark(rgba(61, 61, 58, 0.7), rgba(194, 192, 182, 0.7));
+    --color-ring-inverse: light-dark(rgba(255, 255, 255, 0.7), rgba(20, 20, 19, 0.7));
+    --color-ring-info: light-dark(rgba(50, 102, 173, 0.5), rgba(128, 170, 221, 0.5));
+    --color-ring-danger: light-dark(rgba(167, 61, 57, 0.5), rgba(205, 92, 88, 0.5));
+    --color-ring-success: light-dark(rgba(67, 116, 38, 0.5), rgba(89, 145, 48, 0.5));
+    --color-ring-warning: light-dark(rgba(128, 92, 31, 0.5), rgba(168, 120, 41, 0.5));
+    --font-sans: Anthropic Sans, sans-serif;
+    --font-mono: ui-monospace, monospace;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-text-xs-size: 12px;
+    --font-text-sm-size: 14px;
+    --font-text-md-size: 16px;
+    --font-text-lg-size: 20px;
+    --font-heading-xs-size: 12px;
+    --font-heading-sm-size: 14px;
+    --font-heading-md-size: 16px;
+    --font-heading-lg-size: 20px;
+    --font-heading-xl-size: 24px;
+    --font-heading-2xl-size: 28px;
+    --font-heading-3xl-size: 36px;
+    --font-text-xs-line-height: 1.4;
+    --font-text-sm-line-height: 1.4;
+    --font-text-md-line-height: 1.4;
+    --font-text-lg-line-height: 1.25;
+    --font-heading-xs-line-height: 1.4;
+    --font-heading-sm-line-height: 1.4;
+    --font-heading-md-line-height: 1.4;
+    --font-heading-lg-line-height: 1.25;
+    --font-heading-xl-line-height: 1.25;
+    --font-heading-2xl-line-height: 1.1;
+    --font-heading-3xl-line-height: 1;
+    --border-radius-xs: 4px;
+    --border-radius-sm: 6px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 10px;
+    --border-radius-xl: 12px;
+    --border-radius-full: 9999px;
+    --border-width-regular: 0.5px;
+    --shadow-hairline: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+*{box-sizing:border-box;margin:0;padding:0}
+body { zoom: 2 }
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+pre{background:var(--color-background-tertiary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:14px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.75;color:var(--color-text-primary);overflow-x:auto;white-space:pre;margin:6px 0 10px}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.t-tsq{background:var(--color-background-danger);color:var(--color-text-danger)}
+.t-zus{background:var(--color-background-warning);color:var(--color-text-warning)}
+.t-ws{background:var(--color-background-info);color:var(--color-text-info)}
+.t-new{background:var(--color-background-success);color:var(--color-text-success)}
+.pill{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:500;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s;flex-shrink:0;user-select:none}
+.pill.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.pill.done{background:var(--color-background-success);color:var(--color-text-success)}
+.sep{flex:1;height:0.5px;background:var(--color-border-tertiary);min-width:4px;max-width:20px;align-self:center}
+.concept{background:var(--color-background-info);border-radius:var(--border-radius-md);padding:11px 14px;font-size:12px;color:var(--color-text-info);line-height:1.65;margin-top:10px}
+.warn{background:var(--color-background-warning);border-radius:var(--border-radius-md);padding:11px 14px;font-size:12px;color:var(--color-text-warning);line-height:1.65;margin-top:10px}
+.danger{background:var(--color-background-danger);border-radius:var(--border-radius-md);padding:11px 14px;font-size:12px;color:var(--color-text-danger);line-height:1.65;margin-top:10px}
+.file-label{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:var(--border-radius-md);background:var(--color-background-info);color:var(--color-text-info);margin:10px 0 4px}
+.sec-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin:14px 0 4px}
+p.body{font-size:13px;color:var(--color-text-secondary);line-height:1.65;margin-bottom:10px}
+h2{font-size:17px;font-weight:500;color:var(--color-text-primary)}
+</style>
+
+</head>
+<body class="p-4!">
+
+<h2 class="sr-only">Trade and order panel implementation plan — interactive step-by-step guide</h2>
+
+<div style="padding:1rem 0">
+  <div id="stepper" style="display:flex;align-items:center;gap:8px;margin-bottom:20px;flex-wrap:wrap"></div>
+  <div id="card" style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:20px"></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+    <button id="btn-prev" onclick="nav(-1)">← Previous</button>
+    <span id="ctr" style="font-size:12px;color:var(--color-text-tertiary)"></span>
+    <button id="btn-next" onclick="nav(1)">Next →</button>
+  </div>
+</div>
+
+<script>
+const phases=[
+  {
+    title:"Folder structure",
+    tags:["new"],
+    summary:"The Trade panel is more complex than News Feed — it has both a form side (buy/sell inputs) and a live status side (order tracking via WebSocket). Keep them cleanly separated from the start.",
+    sections:[
+      {label:null,code:
+`app/
+└── trade/
+    └── [ticker]/
+        └── page.tsx          ← Route: /trade/AAPL
+
+components/
+└── trade/
+    ├── TradePanel.tsx         ← Shell: tabs Buy/Sell, mounts the form
+    ├── OrderForm.tsx          ← Controlled form, calls usePlaceOrder
+    ├── OrderConfirmModal.tsx  ← Review step before submitting
+    ├── OrderStatusFeed.tsx    ← Live WS updates after submission
+    ├── PriceSummary.tsx       ← Current price, est. total (read-only)
+    └── TradeSkeleton.tsx      ← Loading state
+
+hooks/
+├── usePlaceOrder.ts           ← useMutation — POST the order
+├── useOrderStatus.ts          ← WebSocket — listens for status updates
+└── useCurrentPrice.ts         ← TanStack Query — current bid/ask price
+
+lib/api/
+└── orders.ts                  ← Raw fetch: placeOrder()
+
+store/
+└── orderStore.ts              ← Zustand: pending orders, status map
+
+types/
+└── order.ts                   ← Order, OrderStatus, OrderSide interfaces`}
+    ],
+    concept:"Strict rule: usePlaceOrder handles submission. useOrderStatus handles live tracking. They are intentionally separate — submission is a one-shot mutation, tracking is an ongoing stream. Mixing them in one hook makes both harder to reason about.",
+  },
+  {
+    title:"Type definitions",
+    tags:["new"],
+    summary:"Define every shape before writing logic. The order lifecycle has distinct states — model them explicitly so TypeScript enforces valid transitions.",
+    sections:[
+      {label:"types/order.ts",file:true,code:
+`export type OrderSide = "buy" | "sell"
+export type OrderType = "market" | "limit"
+
+export type OrderStatus =
+  | "idle"        // not submitted yet
+  | "pending"     // submitted, awaiting exchange ack
+  | "partial"     // partially filled
+  | "filled"      // fully executed
+  | "cancelled"   // cancelled before fill
+  | "rejected"    // rejected by exchange
+
+export interface OrderFormValues {
+  ticker: string
+  side: OrderSide
+  type: OrderType
+  quantity: number
+  limitPrice?: number   // only when type === "limit"
+}
+
+export interface PlacedOrder {
+  orderId: string
+  ticker: string
+  side: OrderSide
+  type: OrderType
+  quantity: number
+  limitPrice?: number
+  placedAt: string      // ISO 8601
+  status: OrderStatus
+}
+
+export interface OrderStatusEvent {
+  orderId: string
+  status: OrderStatus
+  filledQuantity: number
+  averagePrice?: number
+  updatedAt: string
+}`}
+    ],
+    concept:"OrderStatus as a union type is key. It means TypeScript will error if you write a switch/case that misses a state — you can never accidentally ignore 'rejected' or 'partial'. This prevents silent UI bugs where a status shows 'pending' forever.",
+  },
+  {
+    title:"API layer",
+    tags:["new"],
+    summary:"One plain async function. No hooks, no React. Just the POST call that submits the order to the backend.",
+    sections:[
+      {label:"lib/api/orders.ts",file:true,code:
+`import type { OrderFormValues, PlacedOrder } from "@/types/order"
+
+export async function placeOrder(
+  values: OrderFormValues
+): Promise<PlacedOrder> {
+  const res = await fetch("/api/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values),
+  })
+
+  if (!res.ok) {
+    // Parse the error body so useMutation's error state
+    // contains the exchange's rejection reason
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.message ?? "Order failed")
+  }
+
+  return res.json()
+}`}
+    ],
+    warn:"Never swallow errors here. Throw them — useMutation catches thrown errors and exposes them via mutation.error. If you catch-and-return null, the mutation thinks it succeeded and the UI shows a success toast for a failed order.",
+  },
+  {
+    title:"usePlaceOrder — useMutation",
+    tags:["tsq","new"],
+    summary:"This is the flip side of useQuery. useMutation handles one-shot write operations: submitting the order, tracking its loading/error/success state, and triggering side effects on completion.",
+    sections:[
+      {label:"hooks/usePlaceOrder.ts",file:true,code:
+`import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { placeOrder } from "@/lib/api/orders"
+import { useOrderStore } from "@/store/orderStore"
+import type { OrderFormValues } from "@/types/order"
+
+export function usePlaceOrder() {
+  const queryClient = useQueryClient()
+  const addPendingOrder = useOrderStore((s) => s.addPendingOrder)
+
+  return useMutation({
+    mutationFn: (values: OrderFormValues) => placeOrder(values),
+
+    onSuccess: (placedOrder) => {
+      // 1. Add to Zustand so OrderStatusFeed can track it
+      addPendingOrder(placedOrder)
+
+      // 2. Invalidate portfolio — holdings changed after a fill
+      queryClient.invalidateQueries({ queryKey: ["portfolio"] })
+
+      // 3. Invalidate buying power — cash changed
+      queryClient.invalidateQueries({ queryKey: ["account", "buyingPower"] })
+    },
+
+    onError: (error) => {
+      // Error is exposed via mutation.error — handle display in the component
+      console.error("Order rejected:", error.message)
+    },
+  })
+}`},
+      {label:"What you get back",code:
+`const mutation = usePlaceOrder()
+
+mutation.mutate(formValues)       // submit the order
+
+mutation.isPending                // true while POST is in flight
+mutation.isSuccess                // true after onSuccess fires
+mutation.isError                  // true if the POST threw
+mutation.error?.message           // exchange rejection reason
+mutation.data                     // the PlacedOrder returned on success
+mutation.reset()                  // clear back to idle state`}
+    ],
+    concept:"queryClient.invalidateQueries() in onSuccess is the key pattern. It tells TanStack Query 'this data is now stale — refetch it'. The portfolio component re-renders with fresh holdings automatically, without any prop drilling or manual state update.",
+  },
+  {
+    title:"Zustand order store",
+    tags:["zus","new"],
+    summary:"Tracks the state of all in-flight and recently filled orders. This is what bridges the mutation (submission) and the WebSocket (live status) — both read and write to this same store.",
+    sections:[
+      {label:"store/orderStore.ts",file:true,code:
+`import { create } from "zustand"
+import type { PlacedOrder, OrderStatus } from "@/types/order"
+
+interface OrderState {
+  // Map of orderId → PlacedOrder for all active orders
+  orders: Record<string, PlacedOrder>
+
+  addPendingOrder: (order: PlacedOrder) => void
+
+  // Called by useOrderStatus when a WS event arrives
+  updateOrderStatus: (
+    orderId: string,
+    status: OrderStatus,
+    filledQuantity: number,
+    averagePrice?: number
+  ) => void
+
+  clearFilledOrders: () => void
+}
+
+export const useOrderStore = create<OrderState>((set) => ({
+  orders: {},
+
+  addPendingOrder: (order) =>
+    set((s) => ({
+      orders: { ...s.orders, [order.orderId]: order },
+    })),
+
+  updateOrderStatus: (orderId, status, filledQuantity, averagePrice) =>
+    set((s) => {
+      if (!s.orders[orderId]) return s
+      return {
+        orders: {
+          ...s.orders,
+          [orderId]: {
+            ...s.orders[orderId],
+            status,
+            filledQuantity,
+            averagePrice,
+          },
+        },
+      }
+    }),
+
+  clearFilledOrders: () =>
+    set((s) => ({
+      orders: Object.fromEntries(
+        Object.entries(s.orders).filter(
+          ([, o]) => o.status !== "filled" && o.status !== "cancelled"
+        )
+      ),
+    })),
+}))`}
+    ],
+    concept:"The store is the single source of truth for order state. usePlaceOrder writes to it (addPendingOrder). useOrderStatus writes to it (updateOrderStatus). OrderStatusFeed reads from it. Nothing needs to pass data via props — any component can subscribe to any order.",
+  },
+  {
+    title:"useOrderStatus — WebSocket",
+    tags:["ws","new"],
+    summary:"Opens a WebSocket after an order is placed and listens for status events from the exchange. Each event updates Zustand — all components subscribed to that order re-render automatically.",
+    sections:[
+      {label:"hooks/useOrderStatus.ts",file:true,code:
+`import { useEffect, useRef } from "react"
+import { useOrderStore } from "@/store/orderStore"
+import { useQueryClient } from "@tanstack/react-query"
+import type { OrderStatusEvent } from "@/types/order"
+
+const TERMINAL_STATUSES = new Set(["filled", "cancelled", "rejected"])
+
+export function useOrderStatus(orderId: string | null) {
+  const updateOrderStatus = useOrderStore((s) => s.updateOrderStatus)
+  const queryClient = useQueryClient()
+  const wsRef = useRef<WebSocket | null>(null)
+
+  useEffect(() => {
+    // No orderId yet (before submission) — do nothing
+    if (!orderId) return
+
+    const ws = new WebSocket(
+      \`\${process.env.NEXT_PUBLIC_WS_URL}/orders/\${orderId}/status\`
+    )
+    wsRef.current = ws
+
+    ws.onmessage = (event) => {
+      const msg: OrderStatusEvent = JSON.parse(event.data)
+
+      // 1. Update Zustand — triggers re-render in OrderStatusFeed
+      updateOrderStatus(
+        msg.orderId,
+        msg.status,
+        msg.filledQuantity,
+        msg.averagePrice
+      )
+
+      // 2. On fill: invalidate portfolio so holdings refresh
+      if (msg.status === "filled") {
+        queryClient.invalidateQueries({ queryKey: ["portfolio"] })
+        ws.close()   // terminal state — no more events expected
+      }
+
+      // 3. On terminal status: close the socket
+      if (TERMINAL_STATUSES.has(msg.status)) {
+        ws.close()
+      }
+    }
+
+    ws.onerror = () => {
+      // Fallback: poll order status if WS fails
+      console.warn(\`WS failed for order \${orderId}, consider polling fallback\`)
+    }
+
+    // Cleanup: always close on unmount or orderId change
+    return () => ws.close()
+
+  }, [orderId])  // reconnects only when orderId changes
+}`}
+    ],
+    concept:"Closing the WebSocket on terminal status (filled, cancelled, rejected) is critical. If you leave it open, the server keeps pushing to a connection nobody needs. More importantly: the cleanup function (return () => ws.close()) prevents stale connections when the component unmounts — e.g. when the user navigates away mid-order.",
+    danger:"Missing the cleanup return is the most common WebSocket bug. Without it, every re-render of the parent creates a new WebSocket. After 10 navigations you have 10 open connections all writing to the same Zustand store — you'll see duplicate status updates and confusing state.",
+  },
+  {
+    title:"OrderForm component",
+    tags:["new"],
+    summary:"The controlled form component. Manages local form state, shows a confirmation modal before submitting, then hands off to usePlaceOrder. Deliberately keeps no knowledge of WebSocket or order tracking.",
+    sections:[
+      {label:"components/trade/OrderForm.tsx",file:true,code:
+`"use client"
+
+import { useState } from "react"
+import { usePlaceOrder } from "@/hooks/usePlaceOrder"
+import { useOrderStore } from "@/store/orderStore"
+import type { OrderFormValues, OrderSide, OrderType } from "@/types/order"
+
+interface Props { ticker: string; side: OrderSide }
+
+export function OrderForm({ ticker, side }: Props) {
+  const mutation = usePlaceOrder()
+
+  // Local form state — doesn't touch Zustand until submission
+  const [orderType, setOrderType] = useState<OrderType>("market")
+  const [quantity, setQuantity]   = useState("")
+  const [limitPrice, setLimitPrice] = useState("")
+  const [showConfirm, setShowConfirm] = useState(false)
+
+  const formValues: OrderFormValues = {
+    ticker,
+    side,
+    type: orderType,
+    quantity: Number(quantity),
+    limitPrice: orderType === "limit" ? Number(limitPrice) : undefined,
+  }
+
+  const isValid =
+    Number(quantity) > 0 &&
+    (orderType === "market" || Number(limitPrice) > 0)
+
+  const handleSubmit = () => {
+    setShowConfirm(false)
+    mutation.mutate(formValues, {
+      onSuccess: () => {
+        // Reset form after successful submission
+        setQuantity("")
+        setLimitPrice("")
+      }
+    })
+  }
+
+  // After success — switch to showing the order status
+  if (mutation.isSuccess && mutation.data) {
+    return <OrderStatusFeed orderId={mutation.data.orderId} />
+  }
+
+  return (
+    <div>
+      {/* Order type toggle: Market / Limit */}
+      {/* Quantity input */}
+      {/* Limit price input — only shown when type === "limit" */}
+      {/* Estimated total (quantity × current price) */}
+
+      {mutation.isError && (
+        <p role="alert" style={{ color: "red" }}>
+          {mutation.error?.message ?? "Order failed. Try again."}
+        </p>
+      )}
+
+      <button
+        onClick={() => setShowConfirm(true)}
+        disabled={!isValid || mutation.isPending}
+      >
+        {mutation.isPending
+          ? "Placing order..."
+          : \`\${side === "buy" ? "Buy" : "Sell"} \${ticker}\`}
+      </button>
+
+      {showConfirm && (
+        <OrderConfirmModal
+          values={formValues}
+          onConfirm={handleSubmit}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
+    </div>
+  )
+}`}
+    ],
+    concept:"mutation.isSuccess check after the return guard is the key UX pattern. Once the order is placed successfully, the same panel transitions from the form view to the live status feed — no route change, no modal dismiss. The user stays in context and watches their order fill in real time.",
+  },
+  {
+    title:"OrderStatusFeed component",
+    tags:["ws","zus","new"],
+    summary:"Rendered after a successful submission. Opens the WebSocket via useOrderStatus and reads live state from Zustand. Displays a progress timeline as the order moves through states.",
+    sections:[
+      {label:"components/trade/OrderStatusFeed.tsx",file:true,code:
+`"use client"
+
+import { useOrderStatus } from "@/hooks/useOrderStatus"
+import { useOrderStore } from "@/store/orderStore"
+
+interface Props { orderId: string }
+
+const STATUS_STEPS = ["pending", "partial", "filled"] as const
+
+export function OrderStatusFeed({ orderId }: Props) {
+  // Open the WebSocket — updates Zustand on each event
+  useOrderStatus(orderId)
+
+  // Read current state from Zustand
+  const order = useOrderStore((s) => s.orders[orderId])
+
+  if (!order) return null
+
+  const isFinal =
+    order.status === "filled" ||
+    order.status === "cancelled" ||
+    order.status === "rejected"
+
+  return (
+    <div>
+      {/* Status timeline */}
+      <ol>
+        {STATUS_STEPS.map((step) => (
+          <li
+            key={step}
+            data-active={order.status === step}
+            data-done={
+              STATUS_STEPS.indexOf(step) <
+              STATUS_STEPS.indexOf(order.status as typeof STATUS_STEPS[number])
+            }
+          >
+            {step}
+          </li>
+        ))}
+      </ol>
+
+      {/* Fill details */}
+      {order.status === "partial" && (
+        <p>{order.filledQuantity} of {order.quantity} shares filled</p>
+      )}
+
+      {order.status === "filled" && (
+        <p>
+          Filled {order.quantity} shares
+          at avg. ₩{order.averagePrice?.toLocaleString()}
+        </p>
+      )}
+
+      {order.status === "rejected" && (
+        <p role="alert">Order rejected by exchange.</p>
+      )}
+
+      {/* Back to form if terminal */}
+      {isFinal && (
+        <button onClick={() => window.location.reload()}>
+          Place another order
+        </button>
+      )}
+    </div>
+  )
+}`}
+    ],
+    concept:"Notice useOrderStatus(orderId) is called here — not in OrderForm. This is intentional. The WebSocket only opens once the order exists and this component is rendered. If the user never places an order, no WS connection is ever made. Open resources only when you actually need them.",
+  },
+  {
+    title:"Route entry point",
+    tags:["new"],
+    summary:"Thin Server Component. The ticker comes from the URL param — this lets users share or bookmark a trade link like /trade/AAPL.",
+    sections:[
+      {label:"app/trade/[ticker]/page.tsx",file:true,code:
+`import { TradePanel } from "@/components/trade/TradePanel"
+
+interface Props {
+  params: { ticker: string }
+}
+
+export function generateMetadata({ params }: Props) {
+  return { title: \`Trade \${params.ticker.toUpperCase()} — Toss Stock\` }
+}
+
+export default function TradePage({ params }: Props) {
+  const ticker = params.ticker.toUpperCase()
+
+  return (
+    <main>
+      <TradePanel ticker={ticker} />
+    </main>
+  )
+}`},
+      {label:"components/trade/TradePanel.tsx (shell)",file:true,code:
+`"use client"
+
+import { useState } from "react"
+import { OrderForm } from "./OrderForm"
+import type { OrderSide } from "@/types/order"
+
+export function TradePanel({ ticker }: { ticker: string }) {
+  const [side, setSide] = useState<OrderSide>("buy")
+
+  return (
+    <div>
+      {/* Buy / Sell tab switcher */}
+      <div role="tablist">
+        <button
+          role="tab"
+          aria-selected={side === "buy"}
+          onClick={() => setSide("buy")}
+        >
+          Buy
+        </button>
+        <button
+          role="tab"
+          aria-selected={side === "sell"}
+          onClick={() => setSide("sell")}
+        >
+          Sell
+        </button>
+      </div>
+
+      {/* PriceSummary: current price via useCurrentPrice (polling) */}
+      <PriceSummary ticker={ticker} />
+
+      {/* Form: controlled inputs + mutation */}
+      <OrderForm ticker={ticker} side={side} />
+    </div>
+  )
+}`}
+    ],
+    concept:"TradePanel only manages the buy/sell tab. It has no knowledge of mutation state or WebSocket. OrderForm owns mutation state. OrderStatusFeed owns WebSocket state. Each component owns exactly one concern — this is what makes them independently testable.",
+  },
+  {
+    title:"Build order",
+    tags:[],
+    summary:"Follow this sequence. Each step has a clear done state before the next one starts.",
+    sections:[
+      {label:null,code:
+`Step 1  types/order.ts
+        Define all types and status union
+        Done: TypeScript compiles with no errors
+
+Step 2  lib/api/orders.ts
+        Write placeOrder() — test with curl or mock
+        Done: calling it returns a PlacedOrder object
+
+Step 3  store/orderStore.ts
+        Build Zustand store — test in devtools
+        Done: addPendingOrder + updateOrderStatus work in isolation
+
+Step 4  hooks/usePlaceOrder.ts
+        Wrap placeOrder in useMutation
+        Done: mutation.mutate() posts + onSuccess fires
+
+Step 5  components/trade/OrderForm.tsx (no WS yet)
+        Build form UI + confirmation modal + submit
+        Done: placing an order logs the PlacedOrder to console
+
+Step 6  hooks/useOrderStatus.ts
+        Build WebSocket hook with cleanup
+        Done: WS events update Zustand in devtools
+
+Step 7  components/trade/OrderStatusFeed.tsx
+        Connect hook + Zustand + render status timeline
+        Done: status transitions visible as WS events arrive
+
+Step 8  Wire TradePanel → OrderForm → OrderStatusFeed transition
+        Done: form disappears, status feed appears on success
+
+Step 9  app/trade/[ticker]/page.tsx
+        Add route, test end-to-end with mock WS
+
+Step 10 queryClient.invalidateQueries in onSuccess
+        Done: portfolio refreshes after a fill`}
+    ],
+    concept:"Build steps 1–5 with a mock placeOrder() returning a fake PlacedOrder synchronously. Then build step 6–7 with a mock WebSocket server (use 'ws' npm package locally). Only wire them together in step 8. Isolating each layer means when something breaks, you know exactly which layer to look at.",
+  },
+];
+
+let cur=0;
+
+function nav(d){cur=Math.max(0,Math.min(phases.length-1,cur+d));render()}
+function goTo(i){cur=i;render()}
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function render(){
+  const p=phases[cur];
+  const tagMap={tsq:['t-tsq','TanStack Query'],zus:['t-zus','Zustand'],ws:['t-ws','WebSocket'],new:['t-new','New file']};
+
+  document.getElementById('stepper').innerHTML=phases.map((_,i)=>{
+    const cls=i<cur?'pill done':i===cur?'pill active':'pill';
+    return `<span class="${cls}" onclick="goTo(${i})">${i<cur?'✓':i+1}</span>${i<phases.length-1?'<div class="sep"></div>':''}`;
+  }).join('');
+
+  const tagsHtml=p.tags.map(t=>{const[cls,lbl]=tagMap[t];return`<span class="tag ${cls}">${lbl}</span>`}).join('');
+
+  const sectionsHtml=p.sections.map(s=>{
+    const fl=s.file?`<div class="file-label"><i class="ti ti-file-code" aria-hidden="true"></i>${s.label}</div>`:s.label?`<div class="sec-title">${s.label}</div>`:'';
+    return`${fl}<pre>${esc(s.code)}</pre>`;
+  }).join('');
+
+  const extras=[
+    p.concept?`<div class="concept"><strong>Key concept:</strong> ${p.concept}</div>`:'',
+    p.warn?`<div class="warn"><strong>Note:</strong> ${p.warn}</div>`:'',
+    p.danger?`<div class="danger"><i class="ti ti-alert-triangle" aria-hidden="true"></i> <strong>Common bug:</strong> ${p.danger}</div>`:'',
+  ].join('');
+
+  document.getElementById('card').innerHTML=`
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:4px">Phase ${cur+1} of ${phases.length}</div>
+        <h2>${p.title}</h2>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${tagsHtml}</div>
+    </div>
+    <p class="body">${p.summary}</p>
+    ${sectionsHtml}${extras}`;
+
+  document.getElementById('btn-prev').disabled=cur===0;
+  document.getElementById('btn-next').disabled=cur===phases.length-1;
+  document.getElementById('btn-next').textContent=cur===phases.length-1?'Done ✓':'Next →';
+  document.getElementById('ctr').textContent=`${cur+1} / ${phases.length}`;
+}
+
+render();
+</script>
+
+</body>
+</html>
