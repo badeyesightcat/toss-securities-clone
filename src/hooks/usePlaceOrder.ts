@@ -2,6 +2,19 @@ import { placeOrder } from "@/lib/api/orders";
 import { OrderFormValues } from "@/types/order";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+/* // What you get back
+const mutation = usePlaceOrder();
+
+mutation.mutate(formValues); // submit the order
+
+mutation.isPending; // true while POST is in flight
+mutation.isSuccess; // true after onSuccess fires
+mutation.isError; // true if the POST threw
+mutation.error?.message; // exchange rejection reason
+mutation.data; // the PlacedOrder returned on success
+mutation.reset(); // clear back to idle state
+*/
+
 export function usePlaceOrder() {
   const queryClient = useQueryClient();
   const addPendingOrder = useOrderStore((s) => s.addPendingOrder);
