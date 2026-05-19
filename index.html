@@ -1,70 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title><script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+  :root{
+    --color-background-primary: light-dark(rgba(255, 255, 255, 1), rgba(48, 48, 46, 1));
+    --color-background-secondary: light-dark(rgba(245, 244, 237, 1), rgba(38, 38, 36, 1));
+    --color-background-tertiary: light-dark(rgba(250, 249, 245, 1), rgba(20, 20, 19, 1));
+    --color-background-inverse: light-dark(rgba(20, 20, 19, 1), rgba(250, 249, 245, 1));
+    --color-background-ghost: light-dark(rgba(255, 255, 255, 0), rgba(48, 48, 46, 0));
+    --color-background-info: light-dark(rgba(214, 228, 246, 1), rgba(37, 62, 95, 1));
+    --color-background-danger: light-dark(rgba(247, 236, 236, 1), rgba(96, 42, 40, 1));
+    --color-background-success: light-dark(rgba(233, 241, 220, 1), rgba(27, 70, 20, 1));
+    --color-background-warning: light-dark(rgba(246, 238, 223, 1), rgba(72, 58, 15, 1));
+    --color-background-disabled: light-dark(rgba(255, 255, 255, 0.5), rgba(48, 48, 46, 0.5));
+    --color-text-primary: light-dark(rgba(20, 20, 19, 1), rgba(250, 249, 245, 1));
+    --color-text-secondary: light-dark(rgba(61, 61, 58, 1), rgba(194, 192, 182, 1));
+    --color-text-tertiary: light-dark(rgba(115, 114, 108, 1), rgba(156, 154, 146, 1));
+    --color-text-inverse: light-dark(rgba(255, 255, 255, 1), rgba(20, 20, 19, 1));
+    --color-text-info: light-dark(rgba(50, 102, 173, 1), rgba(128, 170, 221, 1));
+    --color-text-danger: light-dark(rgba(127, 44, 40, 1), rgba(238, 136, 132, 1));
+    --color-text-success: light-dark(rgba(38, 91, 25, 1), rgba(122, 185, 72, 1));
+    --color-text-warning: light-dark(rgba(90, 72, 21, 1), rgba(209, 160, 65, 1));
+    --color-text-disabled: light-dark(rgba(20, 20, 19, 0.5), rgba(250, 249, 245, 0.5));
+    --color-text-ghost: light-dark(rgba(115, 114, 108, 0.5), rgba(156, 154, 146, 0.5));
+    --color-border-primary: light-dark(rgba(31, 30, 29, 0.4), rgba(222, 220, 209, 0.4));
+    --color-border-secondary: light-dark(rgba(31, 30, 29, 0.3), rgba(222, 220, 209, 0.3));
+    --color-border-tertiary: light-dark(rgba(31, 30, 29, 0.15), rgba(222, 220, 209, 0.15));
+    --color-border-inverse: light-dark(rgba(255, 255, 255, 0.3), rgba(20, 20, 19, 0.15));
+    --color-border-ghost: light-dark(rgba(31, 30, 29, 0), rgba(222, 220, 209, 0));
+    --color-border-info: light-dark(rgba(70, 130, 213, 1), rgba(70, 130, 213, 1));
+    --color-border-danger: light-dark(rgba(167, 61, 57, 1), rgba(205, 92, 88, 1));
+    --color-border-success: light-dark(rgba(67, 116, 38, 1), rgba(89, 145, 48, 1));
+    --color-border-warning: light-dark(rgba(128, 92, 31, 1), rgba(168, 120, 41, 1));
+    --color-border-disabled: light-dark(rgba(31, 30, 29, 0.1), rgba(222, 220, 209, 0.1));
+    --color-ring-primary: light-dark(rgba(20, 20, 19, 0.7), rgba(250, 249, 245, 0.7));
+    --color-ring-secondary: light-dark(rgba(61, 61, 58, 0.7), rgba(194, 192, 182, 0.7));
+    --color-ring-inverse: light-dark(rgba(255, 255, 255, 0.7), rgba(20, 20, 19, 0.7));
+    --color-ring-info: light-dark(rgba(50, 102, 173, 0.5), rgba(128, 170, 221, 0.5));
+    --color-ring-danger: light-dark(rgba(167, 61, 57, 0.5), rgba(205, 92, 88, 0.5));
+    --color-ring-success: light-dark(rgba(67, 116, 38, 0.5), rgba(89, 145, 48, 0.5));
+    --color-ring-warning: light-dark(rgba(128, 92, 31, 0.5), rgba(168, 120, 41, 0.5));
+    --font-sans: Anthropic Sans, sans-serif;
+    --font-mono: ui-monospace, monospace;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-text-xs-size: 12px;
+    --font-text-sm-size: 14px;
+    --font-text-md-size: 16px;
+    --font-text-lg-size: 20px;
+    --font-heading-xs-size: 12px;
+    --font-heading-sm-size: 14px;
+    --font-heading-md-size: 16px;
+    --font-heading-lg-size: 20px;
+    --font-heading-xl-size: 24px;
+    --font-heading-2xl-size: 28px;
+    --font-heading-3xl-size: 36px;
+    --font-text-xs-line-height: 1.4;
+    --font-text-sm-line-height: 1.4;
+    --font-text-md-line-height: 1.4;
+    --font-text-lg-line-height: 1.25;
+    --font-heading-xs-line-height: 1.4;
+    --font-heading-sm-line-height: 1.4;
+    --font-heading-md-line-height: 1.4;
+    --font-heading-lg-line-height: 1.25;
+    --font-heading-xl-line-height: 1.25;
+    --font-heading-2xl-line-height: 1.1;
+    --font-heading-3xl-line-height: 1;
+    --border-radius-xs: 4px;
+    --border-radius-sm: 6px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 10px;
+    --border-radius-xl: 12px;
+    --border-radius-full: 9999px;
+    --border-width-regular: 0.5px;
+    --shadow-hairline: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); zoom: 2; padding: 1rem; }
+
+  .tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 500; padding: 2px 8px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .tag-ws  { background: #EEEDFE; color: #3C3489; }
+  .tag-sse { background: #E1F5EE; color: #085041; }
+  .tag-poll{ background: #FAEEDA; color: #633806; }
+  .tag-tsq { background: #FAECE7; color: #712B13; }
+  .tag-zus { background: #FBEAF0; color: #72243E; }
+
+  @media (prefers-color-scheme: dark) {
+    .tag-ws  { background: #26215C; color: #CECBF6; }
+    .tag-sse { background: #04342C; color: #9FE1CB; }
+    .tag-poll{ background: #412402; color: #FAC775; }
+    .tag-tsq { background: #4A1B0C; color: #F5C4B3; }
+    .tag-zus { background: #4B1528; color: #F4C0D1; }
+  }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .card:hover { border-color: var(--color-border-secondary); }
+  .card.active { border: 1.5px solid var(--color-border-info); }
+
+  .level-badge {
+    font-size: 10px; font-weight: 500; padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .lv1 { background: var(--color-background-success); color: var(--color-text-success); }
+  .lv2 { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .lv3 { background: var(--color-background-danger); color: var(--color-text-danger); }
+
+  .detail-panel {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+  }
+
+  .task-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    font-size: 13px;
+  }
+  .task-row:last-child { border-bottom: none; }
+  .task-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--color-background-tertiary);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; flex-shrink: 0;
+    color: var(--color-text-secondary);
+  }
+
+  .insight-box {
+    background: var(--color-background-info);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--color-text-info);
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  .legend-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 12px 0 8px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    margin-bottom: 16px;
+  }
+
+  h2 { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+  h3 { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 6px; }
+  p  { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+</style>
 </head>
-<body class="p-4">
-    <ul class="flex gap-3">
-        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-01">Folder structure</a></li>
-        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-02">Type definitions</a></li>
-        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-03">API layer</a></li>
-        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-04">useInfiniteQuery hook</a></li>
-        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-05">Zustand filter store</a></li>
-        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-06">NewsFeed component</a></li>
-        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-07">Prefetch on hover</a></li>
-        <li class="flex rounded bg-blue-200 p-2 text-md text-gray-600 font-semibold hover:bg-blue-950 hover:text-white"><a class="flex-1" href="#news-08">Route entry point</a></li>
-    </ul>
+<body>
 
-    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-01"><strong>Folder structure</strong><br>
-        Key concept: Rule:<br>
-        lib/api/ contains plain async functions — no useQuery, no React. <br>
-        hooks/ wraps them with TanStack Query. <br>
-        Components only call hooks, never fetch directly. <br>
-        This separation means you can swap the API layer without touching any component.
-    <pre>
-    app/
-    └── news/
-        └── page.tsx              ← Route entry point (Server Component)
+<h2 style="sr-only">Toss Stock clone learning map by page</h2>
 
-    components/
-    └── news/
-        ├── NewsFeed.tsx           ← Client Component, owns the list
-        ├── NewsCard.tsx           ← Single article card (pure display)
-        ├── NewsFilterBar.tsx      ← Ticker + category filter UI
-        └── NewsSkeleton.tsx       ← Loading placeholder
+<div style="padding: 1rem 0;">
 
-    hooks/
-    └── useNews.ts                 ← All TanStack Query logic lives here
+<div class="legend-row">
+  <span class="tag tag-ws"><i class="ti ti-plug-connected" aria-hidden="true"></i> WebSocket</span>
+  <span class="tag tag-sse"><i class="ti ti-antenna" aria-hidden="true"></i> SSE</span>
+  <span class="tag tag-poll"><i class="ti ti-refresh" aria-hidden="true"></i> Polling</span>
+  <span class="tag tag-tsq"><i class="ti ti-database" aria-hidden="true"></i> TanStack Query</span>
+  <span class="tag tag-zus"><i class="ti ti-box" aria-hidden="true"></i> Zustand</span>
+  <span style="font-size:11px;color:var(--color-text-tertiary);align-self:center;">— click any page to see what to build</span>
+</div>
 
-    lib/
-    └── api/
-        └── news.ts                ← Raw fetch functions (no React)
+<div id="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px;"></div>
 
-    types/
-    └── news.ts                    ← NewsArticle, NewsFilter interfaces</pre>        
-    </section>
+<div id="detail" style="display:none;"></div>
 
-    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-02"><strong>Type definitions</strong><br>
-        Key concept: nextCursor is the key to infinite scroll. The API returns a cursor pointing to the next page. When it's null, you've reached the end — this is how TanStack Query's useInfiniteQuery knows to disable 'load more'.
-    </section>
+</div>
 
-    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-03"><strong>API layer</strong><br>
-        Key concept: Notice: no try/catch here. TanStack Query catches thrown errors and puts them in the error state automatically — handling it in the fetch function would swallow it before Query can see it.<br>
-        Note: next: { revalidate: 60 } is a Next.js App Router feature. It caches the fetch response at the server level for 60 seconds, reducing load on your news API.<br>
-        Start with a mock. Before wiring up a real API, return a hardcoded NewsFeedPage from fetchNewsPage. This lets you build and test every layer above it (hook, component, store) without needing a backend running. When you swap the mock for a real fetch, only lib/api/news.ts changes.
-    </section>
+<script>
+const pages = [
+  {
+    id: 'home',
+    title: 'Home / Dashboard',
+    icon: 'ti-home',
+    level: 1,
+    levelLabel: 'Start here',
+    desc: 'Portfolio summary, total asset value, daily P&L.',
+    tags: ['poll','tsq','zus'],
+    why: 'The perfect first page. You learn TanStack Query for fetching account data, simple polling for price refresh, and Zustand for storing the selected account. No real-time complexity yet.',
+    tasks: [
+      'Fetch portfolio summary with useQuery (single REST call)',
+      'Poll total value every 10s using refetchInterval',
+      'Store selected account in Zustand (global, persists across tabs)',
+      'Show loading skeleton while data fetches',
+      'Handle error state with a retry button',
+    ],
+    skill: 'You understand the basic query → cache → render cycle and the separation between server state (TanStack) and UI state (Zustand).',
+  },
+  {
+    id: 'watchlist',
+    title: 'Watchlist',
+    icon: 'ti-star',
+    level: 1,
+    levelLabel: 'Start here',
+    desc: 'List of stocks the user follows, with live prices.',
+    tags: ['poll','tsq','zus'],
+    why: 'A gentle introduction to polling multiple resources and Zustand for user preferences. No WebSocket needed — great for practicing the polling pattern at scale.',
+    tasks: [
+      'Fetch all watchlist prices in one batched useQuery call',
+      'Poll the entire list every 5s (one interval, not one per stock)',
+      'Store the watchlist array in Zustand with add/remove actions',
+      'Optimistically remove a stock (update Zustand immediately, revert on API error)',
+      'Sort by % change using a derived selector in Zustand',
+    ],
+    skill: 'You understand batched polling, optimistic updates, and how Zustand selectors derive computed state from raw state.',
+  },
+  {
+    id: 'stockdetail',
+    title: 'Stock Detail',
+    icon: 'ti-chart-line',
+    level: 2,
+    levelLabel: 'Core challenge',
+    desc: 'Price chart, key stats, news feed for one ticker.',
+    tags: ['sse','tsq','zus'],
+    why: 'This is where SSE appears for the first time. The live price ticker at the top streams from the server. The chart history and news are separate TanStack Query calls. Great for learning how to mix real-time and cached data.',
+    tasks: [
+      'Fetch 1D/1W/1M chart data with useQuery (changes when timeframe changes)',
+      'Connect an EventSource for the live bid/ask price ticker',
+      'On each SSE message, call queryClient.setQueryData() to update the cache',
+      'Fetch fundamentals (P/E, market cap) with staleTime: Infinity — fetched once',
+      'Fetch news with useInfiniteQuery + load more button',
+      'Store selected timeframe in Zustand (shared if multiple charts open)',
+    ],
+    skill: 'You understand the SSE → setQueryData bridge, staleTime strategy per data type, and infinite queries.',
+  },
+  {
+    id: 'orderbook',
+    title: 'Order Book',
+    icon: 'ti-list-details',
+    level: 3,
+    levelLabel: 'Advanced',
+    desc: 'Live bids and asks, updated tick by tick.',
+    tags: ['ws','zus'],
+    why: 'The hardest real-time page. Order books update 10-50x per second — polling and SSE are too slow. WebSocket is the right tool. You also learn how to handle high-frequency state updates without crashing React.',
+    tasks: [
+      'Open a WebSocket on mount, close it on unmount (cleanup!)',
+      'Subscribe to order book depth channel on WS open',
+      'Merge incoming delta updates into the existing book (not replace — merge)',
+      'Store the order book in Zustand with a throttled setter (update max 10x/sec)',
+      'Highlight rows that changed in the last tick with a flash animation',
+      'Handle WS disconnect with exponential backoff reconnect',
+    ],
+    skill: 'You understand WebSocket lifecycle, delta vs snapshot updates, throttling high-frequency state, and reconnect strategies.',
+  },
+  {
+    id: 'trading',
+    title: 'Trade / Order Panel',
+    icon: 'ti-arrows-exchange',
+    level: 2,
+    levelLabel: 'Core challenge',
+    desc: 'Buy/sell form, order confirmation, order status.',
+    tags: ['ws','tsq','zus'],
+    why: 'Mutations are the flip side of queries. useMutation for placing the order, then a WebSocket subscription to watch its execution status update in real time. Teaches the full request → response → live update cycle.',
+    tasks: [
+      'Build the order form with controlled inputs (quantity, price, order type)',
+      'Submit with useMutation — handle isPending, isError, isSuccess states',
+      'On success, subscribe to order status channel via WebSocket',
+      'Update order status in Zustand as WS events arrive (pending → partial → filled)',
+      'Invalidate portfolio query on fill so the dashboard refreshes automatically',
+      'Show a toast notification when the order is fully filled',
+    ],
+    skill: 'You understand useMutation, query invalidation as a side effect, and the mutation → WebSocket subscription pattern.',
+  },
+  {
+    id: 'portfolio',
+    title: 'Portfolio / Holdings',
+    icon: 'ti-briefcase',
+    level: 1,
+    levelLabel: 'Start here',
+    desc: 'All positions, cost basis, unrealized P&L.',
+    tags: ['poll','tsq'],
+    why: 'A read-heavy page with moderate freshness needs. Good practice for structuring multiple dependent queries and understanding how staleTime controls cache behavior for different data ages.',
+    tasks: [
+      'Fetch positions list (changes rarely — staleTime: 30s)',
+      'Fetch current prices for each held ticker (changes often — staleTime: 3s)',
+      'Use a dependent query: prices query only fires after positions query succeeds',
+      'Calculate unrealized P&L client-side from positions + prices',
+      'Poll prices every 5s, but not positions (they only change on trades)',
+      'Add a manual Refresh button that calls refetch() explicitly',
+    ],
+    skill: 'You understand dependent queries, different staleTime per data type, and the difference between background refetch and manual refetch.',
+  },
+  {
+    id: 'market',
+    title: 'Market Overview',
+    icon: 'ti-trending-up',
+    level: 2,
+    levelLabel: 'Core challenge',
+    desc: 'Index prices (KOSPI, NASDAQ), top movers, sector heatmap.',
+    tags: ['sse','tsq','poll'],
+    why: 'You learn to manage multiple real-time streams simultaneously — index prices via SSE, top movers via polling, sector data via a slower query. Tests your ability to coordinate multiple data sources on one page.',
+    tasks: [
+      'Open SSE stream for major index prices (KOSPI, KOSDAQ, S&P 500)',
+      'Poll "top gainers / losers" list every 15s via TanStack Query',
+      'Fetch sector heatmap data with a 1-minute staleTime (changes slowly)',
+      'Route all SSE data into the TanStack Query cache via setQueryData',
+      'Show a pulsing dot indicator when the SSE stream is connected',
+      'Gracefully degrade to polling if SSE connection drops',
+    ],
+    skill: 'You understand running multiple real-time streams in parallel, mixing SSE + polling on one page, and connection state indicators.',
+  },
+  {
+    id: 'news',
+    title: 'News Feed',
+    icon: 'ti-news',
+    level: 1,
+    levelLabel: 'Start here',
+    desc: 'Paginated news articles, filtered by ticker or category.',
+    tags: ['tsq'],
+    why: 'The cleanest page to learn TanStack Query pagination and filtering. No real-time, no Zustand needed. Pure server state management — perfect for understanding queryKey design.',
+    tasks: [
+      'Fetch first page of news with useInfiniteQuery',
+      'Implement "Load more" by calling fetchNextPage()',
+      'Add ticker filter — changing it changes the queryKey, triggering a new fetch',
+      'Cache each page independently so switching back is instant',
+      'Prefetch the next page when the user is near the bottom (useQueryClient.prefetchQuery)',
+      'Show a stale indicator when data is older than 5 minutes',
+    ],
+    skill: 'You master infinite queries, dynamic queryKey design, prefetching, and understanding cache staleness.',
+  },
+];
 
-    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-04"><strong>useInfiniteQuery hook</strong><br>Key concept: queryKey: ['news', ticker, category] is the cache address. Change the ticker? The key changes, Query treats it as a brand new query and fetches fresh data — but the old ticker's data stays cached so switching back is instant.</section>
+const levelConfig = {
+  1: { cls: 'lv1', icon: 'ti-plant' },
+  2: { cls: 'lv2', icon: 'ti-flame' },
+  3: { cls: 'lv3', icon: 'ti-rocket' },
+};
 
-    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-05"><strong>Zustand filter store</strong><br>Key concept: Zustand stores UI state (what the user has selected). TanStack Query stores server state (the articles). They connect in the component: read filter from Zustand, pass it to useNewsFeed(filter). When Zustand updates, the hook re-runs with the new queryKey.</section>
+const tagMeta = {
+  ws:   { cls: 'tag-ws',   icon: 'ti-plug-connected', label: 'WebSocket' },
+  sse:  { cls: 'tag-sse',  icon: 'ti-antenna',        label: 'SSE' },
+  poll: { cls: 'tag-poll', icon: 'ti-refresh',        label: 'Polling' },
+  tsq:  { cls: 'tag-tsq',  icon: 'ti-database',       label: 'TanStack Query' },
+  zus:  { cls: 'tag-zus',  icon: 'ti-box',            label: 'Zustand' },
+};
 
-    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-06"><strong>NewsFeed component</strong><br>Key concept: data?.pages.flatMap(p => p.articles) is the canonical pattern. useInfiniteQuery keeps all pages in memory as an array of pages — flatMap collapses them into one list. The ?? [] fallback handles the initial undefined state before data loads.</section>
+let activeId = null;
 
-    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-07"><strong class="bg-blue-400 p-2">Good for performance! Prefetch on hover</strong><br>Key concept: prefetchInfiniteQuery uses the same queryKey as useNewsFeed — so when fetchNextPage() is called, the data is already in the cache and renders instantly. This is the 'wow factor' moment on the News Feed page.</section>
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = pages.map(p => {
+    const lv = levelConfig[p.level];
+    const tagsHtml = p.tags.map(t => {
+      const m = tagMeta[t];
+      return `<span class="tag ${m.cls}"><i class="ti ${m.icon}" aria-hidden="true"></i>${m.label}</span>`;
+    }).join('');
+    return `
+      <div class="card ${activeId === p.id ? 'active' : ''}" onclick="selectPage('${p.id}')">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <i class="ti ${p.icon}" style="font-size:18px;color:var(--color-text-secondary)" aria-hidden="true"></i>
+            <span style="font-size:13px;font-weight:500;color:var(--color-text-primary)">${p.title}</span>
+          </div>
+          <span class="level-badge ${lv.cls}"><i class="ti ${lv.icon}" aria-hidden="true" style="font-size:10px;"></i> ${p.levelLabel}</span>
+        </div>
+        <p style="font-size:12px;margin-bottom:10px;">${p.desc}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">${tagsHtml}</div>
+      </div>`;
+  }).join('');
+}
 
-    <section class="p-4 mt-2 bg-gray-50 hover:bg-blue-50" id="news-08"><strong class="bg-blue-400 p-2">Good for performance! Route entry point</strong><br>Key concept: HydrationBoundary is optional but powerful. It lets the server prefetch the first page and send it embedded in the HTML — the client renders instantly with real data, no loading skeleton on first visit.</section>
+function selectPage(id) {
+  activeId = activeId === id ? null : id;
+  renderGrid();
+  const panel = document.getElementById('detail');
+  if (!activeId) { panel.style.display = 'none'; return; }
+
+  const p = pages.find(x => x.id === id);
+  const lv = levelConfig[p.level];
+  const tagsHtml = p.tags.map(t => {
+    const m = tagMeta[t];
+    return `<span class="tag ${m.cls}"><i class="ti ${m.icon}" aria-hidden="true"></i> ${m.label}</span>`;
+  }).join('');
+  const tasksHtml = p.tasks.map((t, i) =>
+    `<div class="task-row">
+      <div class="task-num">${i+1}</div>
+      <span style="color:var(--color-text-primary)">${t}</span>
+    </div>`
+  ).join('');
+
+  panel.style.display = 'block';
+  panel.innerHTML = `
+    <div class="detail-panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <i class="ti ${p.icon}" style="font-size:22px;color:var(--color-text-secondary)" aria-hidden="true"></i>
+          <h2>${p.title}</h2>
+        </div>
+        <span class="level-badge ${lv.cls}"><i class="ti ${lv.icon}" aria-hidden="true" style="font-size:11px;"></i> ${p.levelLabel}</span>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">${tagsHtml}</div>
+
+      <h3><i class="ti ti-bulb" aria-hidden="true" style="font-size:14px;margin-right:4px;"></i>Why this page?</h3>
+      <p style="margin-bottom:16px;">${p.why}</p>
+
+      <h3><i class="ti ti-checkbox" aria-hidden="true" style="font-size:14px;margin-right:4px;"></i>What to implement</h3>
+      <div style="margin-bottom:4px;">${tasksHtml}</div>
+
+      <div class="insight-box">
+        <strong>What you'll understand after this:</strong> ${p.skill}
+      </div>
+
+      <button onclick="sendPrompt('Give me a starter implementation plan for the ${p.title} page in a Toss Stock clone, using Next.js App Router, Zustand, and TanStack Query.')" style="margin-top:14px;font-size:12px;">
+        Get implementation plan for this page <i class="ti ti-arrow-up-right" aria-hidden="true"></i>
+      </button>
+    </div>`;
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+renderGrid();
+</script>
+
+  
 </body>
 </html>
